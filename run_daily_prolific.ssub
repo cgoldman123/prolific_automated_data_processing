@@ -1,0 +1,33 @@
+#!/bin/bash
+#SBATCH --partition=c2_gpu
+#SBATCH --ntasks=1
+#SBATCH --nodes=1
+#SBATCH --begin=now
+#SBATCH --mem=6000
+#SBATCH --time=1:00:00
+#SBATCH --output=/media/labs/rsmith/wellbeing/tasks/QC/daily_jobs_output/run_daily_%j.stdout
+#SBATCH --error=/media/labs/rsmith/wellbeing/tasks/QC/daily_jobs_output/run_daily_%j.stderr
+#SBATCH --job-name=crab-rangoon
+#SBATCH --mail-user=cgoldman@laureateinstitute.org
+#SBATCH --mail-type=FAIL
+#SBATCH --workdir=/media/labs/rsmith/wellbeing/tasks/QC/
+#################################################
+
+### run this script with sbatch ./run_daily_prolific.ssub
+
+# Daily 'CRON' Jobs
+# potentially source a file to load in a virtual env
+#source /media/labs/NPC/Analysis/arobinson/MRI_Catalogue/bin/activate
+ml Python/3.10.4-GCCcore-11.3.0
+python /media/labs/rsmith/wellbeing/tasks/QC/prolific_api.py
+
+
+# Specify a valid cron string for the schedule. runs everyday @ 10am
+module load next-cron-time
+SCHEDULE="00 10 * * *"
+
+# resubmit this script with --begin set to the next scheduled cron time
+# next-cron-time is a script that parses a cron schedule string and returns
+# the next execution time
+sbatch --begin="$(next-cron-time "$SCHEDULE")" < /media/labs/rsmith/wellbeing/tasks/QC/run_daily_prolific.ssub
+
