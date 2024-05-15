@@ -162,6 +162,6 @@ def check_questionnaires(subject, sessions_to_check):
     return passed_all_checks, total_attention_checks
 
 
-print(check_questionnaires("58b0d5e700de9e0001863385",[2]))
+#print(check_questionnaires("58b0d5e700de9e0001863385",[2]))
 
 
