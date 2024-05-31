@@ -4,6 +4,7 @@ from task_checks_cmg import task_checks
 from prolific_participant_groups import add_to_participant_groups
 from send_message import second_session_message
 from followup_message import send_followup_message
+import pandas as pd
 
 if os.name == "nt":
     root = 'L:'
@@ -19,30 +20,40 @@ headers = {
     "Authorization": f"Token {carter_api_token}"
 }
 
-# dictionary contains session number: (session project ID, session name, session participant group ID)
+# dictionary contains session number: (session project ID, session name, session participant group ID, approve list file location)
 studies_usa = {
-    1:('6616a502839152e36a068a6b','faces'),
-    2:('6616ad447bf1d2e9056df906','advice','6616a62c94ee081cf6c8f51d'),
-    3:('6616ad8288fe3363982de0f9','dating_and_ToM', '6616a6632e30de86b9b4538e'),
-    4:('6616adbb109058fc7983755e','social', '6616a67bdd5257ab64013d26'),
-    5:('6616ade849aa93dd9575a50c','cooperation', '6616a68b0d40ff613474ee76'),
+    1:('6616a502839152e36a068a6b','faces','','./approve_lists/usa_approve_list_CB1/usa_approved_participants_session1_CB1.csv'),
+    2:('6616ad447bf1d2e9056df906','advice','6616a62c94ee081cf6c8f51d','./approve_lists/usa_approve_list_CB1/usa_approved_participants_session2_CB1.csv'),
+    3:('6616ad8288fe3363982de0f9','dating_and_ToM', '6616a6632e30de86b9b4538e','./approve_lists/usa_approve_list_CB1/usa_approved_participants_session3_CB1.csv'),
+    4:('6616adbb109058fc7983755e','social', '6616a67bdd5257ab64013d26','./approve_lists/usa_approve_list_CB1/usa_approved_participants_session4_CB1.csv'),
+    5:('6616ade849aa93dd9575a50c','cooperation', '6616a68b0d40ff613474ee76','./approve_lists/usa_approve_list_CB1/usa_approved_participants_session5_CB1.csv'),
 }
 
 studies_usa_cb2 = {
-    1:('6644d500cd4ebdb4daf80c41','faces'),
-    2:('6644d57076eb22dadb502204','advice', '6644d89fc37c441dc3ebeada'),
-    3:('6644d5ed2f2b5fe97122d37a','dating_and_ToM', '6644d8bb34bde12c5b47931d'),
-    4:('6644d696dc67e4e407dca7d3','social', '6644d8de9268376a724f7cea'),
-    5:('6644d7e233e81f8b16595896','cooperation', '6644d8fe8122109317c47f4b'),
+    1:('6644d500cd4ebdb4daf80c41','faces','','./approve_lists/usa_approve_list_CB2/usa_approved_participants_session1_CB2.csv'),
+    2:('6644d57076eb22dadb502204','advice', '6644d89fc37c441dc3ebeada','./approve_lists/usa_approve_list_CB2/usa_approved_participants_session2_CB2.csv'),
+    3:('6644d5ed2f2b5fe97122d37a','dating_and_ToM', '6644d8bb34bde12c5b47931d','./approve_lists/usa_approve_list_CB2/usa_approved_participants_session3_CB2.csv'),
+    4:('6644d696dc67e4e407dca7d3','social', '6644d8de9268376a724f7cea','./approve_lists/usa_approve_list_CB2/usa_approved_participants_session4_CB2.csv'),
+    5:('6644d7e233e81f8b16595896','cooperation', '6644d8fe8122109317c47f4b','./approve_lists/usa_approve_list_CB2/usa_approved_participants_session5_CB2.csv'),
 }
 
 studies_japan = {
-    1:('6638fff29189dc7a7b72b504','faces'),
-    2:('6644f973f933dcdd705dae69','advice','6644f8e7a5e1622e5cf8fbc0'),
-    3:('6644fa1c81ee8656470df134','dating_and_ToM', '6644f8f36f8e8cb0424a398f'),
-    4:('6644fa59092bf208cdd3f691','social', '6644f905856dd858b521b3ca'),
-    5:('6644fa8e6f0f636e793ff4ae','cooperation', '6644f90f7ad90c49eff24542'),
+    1:('6638fff29189dc7a7b72b504','faces','','./approve_lists/japan_approve_list_CB1/japan_approved_participants_session1_CB1.csv'),
+    2:('664b5d0be46bae63ae071549','advice','6644f8e7a5e1622e5cf8fbc0','./approve_lists/japan_approve_list_CB1/japan_approved_participants_session2_CB1.csv'),
+    3:('664b73cecce9861577829e90','dating_and_ToM', '6644f8f36f8e8cb0424a398f','./approve_lists/japan_approve_list_CB1/japan_approved_participants_session3_CB1.csv'),
+    4:('664b74d8ce8bcfd0240d292a','social', '6644f905856dd858b521b3ca','./approve_lists/japan_approve_list_CB1/japan_approved_participants_session4_CB1.csv'),
+    5:('664b75563199507f9ffced7b','cooperation', '6644f90f7ad90c49eff24542','./approve_lists/japan_approve_list_CB1/japan_approved_participants_session5_CB1.csv'),
 }
+
+studies_japanese = {
+    1:('665649a6eb9a4519439281cd','faces','','./approve_lists/japanese_approve_list_CB1/japanese_approved_participants_session1_CB1.csv'),
+    2:('665733da63de0137bb9a86e7','advice','66573308a1a5b0631cdd509b','./approve_lists/japanese_approve_list_CB1/japanese_approved_participants_session2_CB1.csv'),
+    3:('665734cc660336b21d8e7213','dating_and_ToM', '66573316ff4736e46b398b74','./approve_lists/japanese_approve_list_CB1/japanese_approved_participants_session3_CB1.csv'),
+    4:('665735477b759c5812413dcb','social', '6657339b7b3a31deecb07c03','./approve_lists/japanese_approve_list_CB1/japanese_approved_participants_session4_CB1.csv'),
+    5:('665735ae1fbdc0b592ef912f','cooperation', '665733ac55e399bec6fe619c','./approve_lists/japanese_approve_list_CB1/japanese_approved_participants_session5_CB1.csv'),
+}
+
+
 
 def check_proj_subs(study,studies):
     project_id = studies[study][0]
@@ -59,9 +70,16 @@ def check_proj_subs(study,studies):
         submissions_data = {}
         submissions_data['results'] = []
 
+    # load in approve list
+    try:
+        approve_list = pd.read_csv(studies[study][3], encoding='utf-8')
+    except UnicodeDecodeError:
+        approve_list = pd.read_csv(studies[study][3], encoding='latin1')
+
+
     for result in submissions_data['results']:
         # Check if the status is 'AWAITING REVIEW'
-        if result['status'] == 'AWAITING REVIEW':
+        if result['status'] == 'AWAITING REVIEW' and (result['participant_id'] not in approve_list['participant_id'].values):
             subject = result['participant_id']
             print(f"{subject} is awaiting review for session {study}")
             passed_all_attention_checks, total_attention_checks = check_questionnaires(subject,[study])
@@ -75,13 +93,15 @@ def check_proj_subs(study,studies):
                 passed_all_behavioral_checks = behavioral_checks[0][0]
             if passed_all_attention_checks and passed_all_behavioral_checks:
                 print(f"{subject} passed all attention and behavioral checks!")
-                params = {"action": "APPROVE"}
-                response = requests.post(f"https://api.prolific.com/api/v1/submissions/{result['id']}/transition/", headers=headers, json=params)
-                if response.ok:
-                    print(f"{subject} was successfully approved for session {study}")
-                else:
-                    print(f"Failed to approve {subject} for session {study}. Error: {response.status_code}")
-                    print(response.text)
+                # params = {"action": "APPROVE"}
+                # response = requests.post(f"https://api.prolific.com/api/v1/submissions/{result['id']}/transition/", headers=headers, json=params)
+                # if response.ok:
+                #     print(f"{subject} was successfully approved for session {study}")
+                # else:
+                #     print(f"Failed to approve {subject} for session {study}. Error: {response.status_code}")
+                #     print(response.text)
+                approve_list.loc[len(approve_list)] = result['participant_id']
+
                 # if not the last study, 
                 if project_name != 'cooperation':
                     pt_group_update.append([studies[study+1][0],subject])
@@ -97,6 +117,9 @@ def check_proj_subs(study,studies):
                 print(message)
                 with open(f'{root}/rsmith/wellbeing/tasks/QC/participant_mistakes.txt', "a") as file:  # Open file in append mode
                     file.write(message + "\n")
+    
+    # write to approve list CSV
+    approve_list.to_csv(studies[study][3], index=False)
 
     ids_by_session = {}
     for session_id, subject_id in pt_group_update:
@@ -106,7 +129,7 @@ def check_proj_subs(study,studies):
        # send message after first session
         if session_id == "6616ad447bf1d2e9056df906" or session_id == "6644d57076eb22dadb502204":
             second_session_message(subject_id) 
-    add_to_participant_groups(ids_by_session, study, studies)
+    add_to_participant_groups(ids_by_session, study+1, studies)
 
 print("\nChecking USA CB1!")
 for study in studies_usa:
@@ -126,4 +149,9 @@ for study in studies_japan:
     if study != 1:
         send_followup_message(study, studies_japan[study][0], studies_japan[study][2])
 
+print("\nChecking Japanese CB1!")
+for study in studies_japanese:
+    check_proj_subs(study,studies_japanese)    
+    if study != 1:
+        send_followup_message(study, studies_japanese[study][0], studies_japanese[study][2])
 

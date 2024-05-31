@@ -28,11 +28,19 @@ headers_carter = {
 
 def send_followup_message(session, study, id):
     pts = requests.get(f"https://api.prolific.com/api/v1/participant-groups/{id}/participants/?limit=200&offset=0", headers=headers_claire)
+    if pts.ok:
+        print(f"Participant group successully gathered for {study}")
+    else:
+        print(f"Failed to get participant group for {study}. Error: {pts.status_code}")
     groupdata = pts.json()
     participant_ids = [participant["participant_id"] for participant in groupdata["results"]]
     groupdata = groupdata['results']
 
     subs = requests.get(f"https://api.prolific.com/api/v1/studies/{study}/submissions/?limit=200&offset=0", headers=headers_claire)
+    if subs.ok:
+        print(f"Submissions successully gathered for {study}")
+    else:
+        print(f"Failed to get submissions for {study}. Error: {subs.status_code}")
     submissions = subs.json()
     submission_ids = [participant["participant_id"] for participant in submissions["results"]]
     submissions = submissions['results']
@@ -65,7 +73,7 @@ def send_followup_message(session, study, id):
 
         for i in range(len(msgs_carter['results'])):
             if (msgs_carter['results'][i]['datetime_created'] > added_to_group):
-               flag.append(1)   
+                flag.append(1)   
             elif re.search('As you were approved', msgs_carter['results'][i]['body']):
                 flag.append(1)           
 
@@ -73,6 +81,8 @@ def send_followup_message(session, study, id):
             stmp = submissions[sub]
             if stmp['participant_id'] == pid:
                 # it's been less than 48 hours since they were added to the participant group for this session
+                if '.' not in added_to_group:
+                    added_to_group = added_to_group.replace('Z', '.000000Z')
                 if datetime.strptime(added_to_group, '%Y-%m-%dT%H:%M:%S.%fZ')+timedelta(hours=48) > datetime.now():
                     flag.append(1)
                 # they have started a submission in this session    

@@ -8,7 +8,8 @@ elif os.name == "posix":
     root = '/media/labs'
 
 folders = {f'{root}/NPC/DataSink/StimTool_Online/WB_Cooperation_Task',f'{root}/NPC/DataSink/StimTool_Online/WB_Social_Media',
-            f'{root}/NPC/DataSink/StimTool_Online/WB_Blind_Dating',f'{root}/NPC/DataSink/StimTool_Online/WB_Advice',f'{root}/NPC/DataSink/StimTool_Online/WB_Emotional_Faces'}
+            f'{root}/NPC/DataSink/StimTool_Online/WB_Blind_Dating',f'{root}/NPC/DataSink/StimTool_Online/WB_Advice',f'{root}/NPC/DataSink/StimTool_Online/WB_Emotional_Faces',
+            f'{root}/NPC/DataSink/StimTool_Online/WB_Emotional_Faces_CB',f'{root}/NPC/DataSink/StimTool_Online/WB_Social_Media_CB'}
 
 
 
@@ -23,7 +24,7 @@ def check_attention_checks(file_path, question_checks):
     results = {}
     for key, (question, item) in question_checks.items():
         response = str(df.loc[df[0] == question, 1].values[0])
-        results[key] = (response== item)
+        results[key] = item in response
     return results
 
 def session_checks(subject, patterns_checks):
@@ -50,7 +51,7 @@ def check_files(subject, session):
     4: ('bfi_', 'fss_', 'sbi_', 'social_media', 'stai_state', 'stai_trait', 'svs_',
         'teps_', 'upps_p', 'v_crt', 'vhs_', 'zan_srv'),
     5: ('bis_bas_', 'cooperation_task', 'dfas_', 'leas_', 'promis_emotion',
-        'promis_meaning', 'promis_self_efficacy', 'promis_sleep', 'promis_social_iso',
+        'promis_meaning', 'promis_self_efficacy', 'promis_self_efficacy_manage','promis_sleep', 'promis_social_iso',
         'promis_social_sat', 'whodas_')
     }
     files=[]
@@ -138,7 +139,7 @@ def check_questionnaires(subject, sessions_to_check):
                 'bis_bas1': ('question_check', 'Item 1'),
             },
             'promis_meaning': {
-                'promis_meaning1': ('question_check1', '4.0'),
+                'promis_meaning1': ('question_check1', '4'),
             },
             'whodas': {
                 'whodas_attn1': ('question_check1', 'Item 5'),
@@ -162,6 +163,9 @@ def check_questionnaires(subject, sessions_to_check):
     return passed_all_checks, total_attention_checks
 
 
-#print(check_questionnaires("58b0d5e700de9e0001863385",[2]))
+# print(check_questionnaires("5c61ab19776b38000156cc95",[3]))
+# print(check_questionnaires("5c61ab19776b38000156cc95",[5]))
+
+
 
 

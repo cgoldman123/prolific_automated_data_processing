@@ -52,3 +52,9 @@ def second_session_message(subject):
         print(f'Failed to send message to {subject} {response.status_code}')
         print(response.text)
         
+
+#Old message for individual payments: """Hello!
+    # We'd like to first thank you for recently completing Session 1 of the Emotion and Decision-Making Study.  
+    # We're happy to let you know you have now been approved to complete Session 2. To be able to make full use of your data, we're hoping each session will be completed between 1 and 2 days apart, so that all 5 sessions are completed within a two-week period.
+    # You will be approved to complete each session on the day following your completion of the previous session. Please don't hesitate to contact us if any issues arise.
+    # Thanks so much again for your willingness to participate!""",
