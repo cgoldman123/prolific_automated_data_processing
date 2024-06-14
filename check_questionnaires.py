@@ -41,16 +41,16 @@ def session_checks(subject, patterns_checks):
 def check_files(subject, session):
     flags={}
     results={}
-    ses_surveys = {1: ('ryff_wb','sticsa_trait','sticsa_state','emotional_faces',
+    ses_surveys = {1: ('ryff_wb','sticsa_trait','sticsa_state',
         'well_being', 'qes_', 'panasx', 'ctq_'),
-    2: ('active_trust', 'csass_oecd', 'dpes_', 'health_questions', 'hils_', 'his_', 
+    2: ('csass_oecd', 'dpes_', 'health_questions', 'hils_', 'his_', 
         'indcol_', 'mhs_', 'pdsq_', 'stait_hope', 'swls_', 'trait_hope'),
-    3: ('asi_', 'blind_dating', 'cit_', 'crt_7_', 'dast_10_', 'dts_', 'gfi_', 'hpq_',
+    3: ('asi_', 'cit_', 'crt_7_', 'dast_10_', 'dts_', 'gfi_', 'hpq_',
         'lot_r_', 'maia_', 'mlq_', 'ncs_short', 'oasis_', 'pcl_5_', 'phq_8_', 'shs_',
         'tas_', 'vps_', 'wolf_'),
-    4: ('bfi_', 'fss_', 'sbi_', 'social_media', 'stai_state', 'stai_trait', 'svs_',
+    4: ('bfi_', 'fss_', 'sbi_', 'stai_state', 'stai_trait', 'svs_',
         'teps_', 'upps_p', 'v_crt', 'vhs_', 'zan_srv'),
-    5: ('bis_bas_', 'cooperation_task', 'dfas_', 'leas_', 'promis_emotion',
+    5: ('bis_bas_', 'dfas_', 'leas_', 'promis_emotion',
         'promis_meaning', 'promis_self_efficacy', 'promis_self_efficacy_manage','promis_sleep', 'promis_social_iso',
         'promis_social_sat', 'whodas_')
     }
@@ -163,8 +163,8 @@ def check_questionnaires(subject, sessions_to_check):
     return passed_all_checks, total_attention_checks
 
 
-# print(check_questionnaires("5c61ab19776b38000156cc95",[3]))
-# print(check_questionnaires("5c61ab19776b38000156cc95",[5]))
+# print(check_questionnaires("65f1347317f275b54319b0cd",[1]))
+# print(check_questionnaires("645370803cea22f8fb1f8342",[2]))
 
 
 

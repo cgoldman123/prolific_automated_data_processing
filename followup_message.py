@@ -57,10 +57,18 @@ def send_followup_message(session, study, id):
         }
 
         messages_claire = requests.get(f"https://api.prolific.com/api/v1/messages/", headers=headers_claire, params=params)
-        msgs_claire = messages_claire.json()      
+        if messages_claire.ok:
+            msgs_claire = messages_claire.json()    
+        else:
+            print("Messages were NOT successfully gotten for Claire")
+            return   
         
         messages_carter = requests.get(f"https://api.prolific.com/api/v1/messages/", headers=headers_carter, params=params)
-        msgs_carter = messages_carter.json()      
+        if messages_carter.ok:
+            msgs_carter = messages_carter.json()    
+        else:
+            print("Messages were NOT successfully gotten for Carter")
+            return
         
         #initialize flag for hasn't started this session
         flag=[0]

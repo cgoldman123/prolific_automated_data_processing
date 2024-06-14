@@ -25,6 +25,10 @@ def add_to_participant_groups(participants_to_add, study, studies):
         participant_ids = [participant["participant_id"] for participant in data["results"]]
         # add participants to the group
         updated_participant_ids = participant_ids + participants_to_add[session_id]
+
+        # only take unique participant IDs
+        updated_participant_ids = list(set(updated_participant_ids))
+
         # patch participant group
         params = {
             "participant_ids": updated_participant_ids

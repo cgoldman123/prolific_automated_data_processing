@@ -24,7 +24,7 @@ python /media/labs/rsmith/wellbeing/tasks/QC/prolific_api.py
 
 # Specify a valid cron string for the schedule. runs everyday @ 10am
 module load next-cron-time
-SCHEDULE="00 10 * * *"
+SCHEDULE="0 */2 * * *"
 
 # resubmit this script with --begin set to the next scheduled cron time
 # next-cron-time is a script that parses a cron schedule string and returns
