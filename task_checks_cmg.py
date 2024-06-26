@@ -279,5 +279,5 @@ def task_checks(subject, task):
         status=[True,flags]
     return [status] 
     
-# behavioral_checks = task_checks("65f1347317f275b54319b0cd", "faces")
-# print(behavioral_checks)
+behavioral_checks = task_checks("65fb5f438050e2495c957083", "dating")
+print(behavioral_checks)

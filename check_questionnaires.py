@@ -163,9 +163,6 @@ def check_questionnaires(subject, sessions_to_check):
     return passed_all_checks, total_attention_checks
 
 
-# print(check_questionnaires("65f1347317f275b54319b0cd",[1]))
-# print(check_questionnaires("645370803cea22f8fb1f8342",[2]))
-
-
-
+#print(check_questionnaires("65fb5f438050e2495c957083",[3]))
+#print(check_questionnaires("66290ede1ab02829b1c72509",[5]))
 

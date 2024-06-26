@@ -127,14 +127,19 @@ def check_proj_subs(study,studies):
 
     for result in submissions_data['results']:
         # exit the loop if submission approve counter is greater than server limit
-        if num_submissions_approved > 30:
+        if num_submissions_approved > 20:
             print("Have already approved more than 30 submissions, not approving any more to avoid overworking server")
             break
        
         # Check if the status is 'AWAITING REVIEW'
         if result['status'] == 'AWAITING REVIEW':
             subject = result['participant_id']
-            if datetime.strptime(result['completed_at'], '%Y-%m-%dT%H:%M:%S.%f%z') >= datetime.now(timezone.utc)-timedelta(hours=18):
+            try: 
+                datetime_obj = datetime.strptime(result['completed_at'], '%Y-%m-%dT%H:%M:%S.%f%z')
+            except ValueError:
+                datetime_obj = datetime.strptime(result['completed_at'], '%Y-%m-%dT%H:%M:%S%z')
+            
+            if datetime_obj >= datetime.now(timezone.utc)-timedelta(hours=18):
                 continue
 
             print(f"{subject} is awaiting review for session {study}")
@@ -186,33 +191,33 @@ def check_proj_subs(study,studies):
         
 
 
-def check_usa_cb1():
-    print("\nChecking USA CB1!")
-    for study in studies_usa:
-        check_proj_subs(study,studies_usa)
-        if study != 1:
-            send_followup_message(study, studies_usa[study][0], studies_usa[study][2])
+# def check_usa_cb1():
+#     print("\nChecking USA CB1!")
+#     for study in studies_usa:
+#         check_proj_subs(study,studies_usa)
+#         if study != 1:
+#             send_followup_message(study, studies_usa[study][0], studies_usa[study][2])
 
-def check_usa_cb2():
-    print("\nChecking USA CB2!")
-    for study in studies_usa_cb2:
-        check_proj_subs(study,studies_usa_cb2)
-        if study != 1:
-            send_followup_message(study, studies_usa_cb2[study][0], studies_usa_cb2[study][2])
+# def check_usa_cb2():
+#     print("\nChecking USA CB2!")
+#     for study in studies_usa_cb2:
+#         check_proj_subs(study,studies_usa_cb2)
+#         if study != 1:
+#             send_followup_message(study, studies_usa_cb2[study][0], studies_usa_cb2[study][2])
 
-def check_japan_cb1():
-    print("\nChecking Japan CB1!")
-    for study in studies_japan:
-        check_proj_subs(study,studies_japan)
-        if study != 1:
-            send_followup_message(study, studies_japan[study][0], studies_japan[study][2])
+# def check_japan_cb1():
+#     print("\nChecking Japan CB1!")
+#     for study in studies_japan:
+#         check_proj_subs(study,studies_japan)
+#         if study != 1:
+#             send_followup_message(study, studies_japan[study][0], studies_japan[study][2])
 
-def check_japanese_cb1():
-    print("\nChecking Japanese CB1!")
-    for study in studies_japanese:
-        check_proj_subs(study,studies_japanese)
-        if study != 1:
-            send_followup_message(study, studies_japanese[study][0], studies_japanese[study][2])
+# def check_japanese_cb1():
+#     print("\nChecking Japanese CB1!")
+#     for study in studies_japanese:
+#         check_proj_subs(study,studies_japanese)
+#         if study != 1:
+#             send_followup_message(study, studies_japanese[study][0], studies_japanese[study][2])
 
 def check_usa_cb1_r2():
     print("\nChecking USA CB1 R2!")
@@ -228,12 +233,12 @@ def check_usa_cb2_r2():
         if study != 1:
             send_followup_message(study, studies_usa_cb2_r2[study][0], studies_usa_cb2_r2[study][2])
 
-def check_asia_cb1_r1():
-    print("\nChecking Asia CB1 R1!")
-    for study in studies_asia_cb1_r1:
-        check_proj_subs(study,studies_asia_cb1_r1)
-        if study != 1:
-            send_followup_message(study, studies_asia_cb1_r1[study][0], studies_asia_cb1_r1[study][2])
+# def check_asia_cb1_r1():
+#     print("\nChecking Asia CB1 R1!")
+#     for study in studies_asia_cb1_r1:
+#         check_proj_subs(study,studies_asia_cb1_r1)
+#         if study != 1:
+#             send_followup_message(study, studies_asia_cb1_r1[study][0], studies_asia_cb1_r1[study][2])
 
 def check_asia_cb2_r1():
     print("\nChecking Asia CB2 R1!")
@@ -242,32 +247,32 @@ def check_asia_cb2_r1():
         if study != 1:
             send_followup_message(study, studies_asia_cb2_r1[study][0], studies_asia_cb2_r1[study][2])
 
-def check_asia_cb1_r2():
-    print("\nChecking Asia CB1 R2!")
-    for study in studies_asia_cb1_r2:
-        check_proj_subs(study,studies_asia_cb1_r2)
-        if study != 1:
-            send_followup_message(study, studies_asia_cb1_r2[study][0], studies_asia_cb1_r2[study][2])
+# def check_asia_cb1_r2():
+#     print("\nChecking Asia CB1 R2!")
+#     for study in studies_asia_cb1_r2:
+#         check_proj_subs(study,studies_asia_cb1_r2)
+#         if study != 1:
+#             send_followup_message(study, studies_asia_cb1_r2[study][0], studies_asia_cb1_r2[study][2])
 
-def check_asia_cb2_r2():
-    print("\nChecking Asia CB2 R2!")
-    for study in studies_asia_cb2_r2:
-        check_proj_subs(study,studies_asia_cb2_r2)
-        if study != 1:
-            send_followup_message(study, studies_asia_cb2_r2[study][0], studies_asia_cb2_r2[study][2])
+# def check_asia_cb2_r2():
+#     print("\nChecking Asia CB2 R2!")
+#     for study in studies_asia_cb2_r2:
+#         check_proj_subs(study,studies_asia_cb2_r2)
+#         if study != 1:
+            # send_followup_message(study, studies_asia_cb2_r2[study][0], studies_asia_cb2_r2[study][2])
 
 # List of functions
 functions = [
-    check_usa_cb1,
-    check_usa_cb2,
-    check_japan_cb1,
-    check_japanese_cb1,
+    # check_usa_cb1,
+    #  check_usa_cb2,
+    # check_japan_cb1,
+    # check_japanese_cb1,
     check_usa_cb1_r2,
     check_usa_cb2_r2,
-    check_asia_cb1_r1,
+    # check_asia_cb1_r1,
     check_asia_cb2_r1,
-    check_asia_cb1_r2,
-    check_asia_cb2_r2
+    # check_asia_cb1_r2,
+    # check_asia_cb2_r2
 ]
 
 # Shuffle the list of functions
