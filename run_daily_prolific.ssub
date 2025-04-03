@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --partition=c2_gpu
+#SBATCH --partition=c3_short
 #SBATCH --ntasks=1
 #SBATCH --nodes=1
 #SBATCH --begin=now
@@ -10,10 +10,10 @@
 #SBATCH --job-name=crab-rangoon
 #SBATCH --mail-user=cgoldman@laureateinstitute.org
 #SBATCH --mail-type=FAIL
-#SBATCH --workdir=/media/labs/rsmith/wellbeing/tasks/QC/
+#SBATCH --chdir=/media/labs/rsmith/wellbeing/tasks/QC/
 #################################################
 
-### run this script with sbatch ./run_daily_prolific.ssub
+### run this script with sbatch /media/labs/rsmith/wellbeing/tasks/QC/run_daily_prolific.ssub
 
 # Daily 'CRON' Jobs
 # potentially source a file to load in a virtual env

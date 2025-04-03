@@ -107,6 +107,79 @@ studies_asia_cb2_r2 = {
     5:('665a2e44a0698cd45b233d4c','faces', '665a255da0c87db18a2693f2',''),
 }
 
+studies_india_asia_cb1_r1 = {
+    1:('667b377f6498bcdfed2de506','faces','',''),
+    2:('667c7870f9b72e1f201dd541','advice','667c75af2f80e6b1aa65549a',''),
+    3:('667c794f82b73b3e10cf771b','dating_and_ToM', '667c75c1792363f6f9f52f15',''),
+    4:('667c7a10c0542aee42f6b81a','social', '667c75d3b413fd17bc3dae1c',''),
+    5:('667c7a85fd000eb8eceb70a8','cooperation', '667c75e90f6292151ecfe4c5',''),
+}
+
+studies_india_asia_cb2_r1 = {
+    1:('667b3818137db703824dd1c6','faces','',''),
+    2:('667c7b1c827314cd6f700ca2','advice','667c76d58998f0dd0e8dbfa1',''),
+    3:('667c7b8a3dc8ad0a4ad3f630','dating_and_ToM', '667c76eeb1594eb8fe7a75fc',''),
+    4:('667c7be3afaacb4612f6bd9e','social', '667c76fb2bfdd774e9c50d74',''),
+    5:('667c7cf7f9b72e1f201dd629','cooperation', '667c77093dc8ad0a4ad3f585',''),
+}
+
+studies_india_asia_cb1_r2 = {
+    1:('667b370d0bd5a9f5831a7686','cooperation','',''),
+    2:('667c7e39be456820ed7abb4f','social','667c761af22501407ef67bd8',''),
+    3:('667c7e8056e786c5661ac022','dating_and_ToM', '667c765b6565ef685c5cdcfe',''),
+    4:('667c7f010bdb83d9e32f522c','advice', '667c766d3cfbb8856d7b34f7',''),
+    5:('667c7fa477e81cff2e7eed4e','faces', '667c767cd1c1166e79caa096',''),
+}
+
+studies_india_asia_cb2_r2 = {
+    1:('667af739092af948c4fffe06','cooperation','',''),
+    2:('667c803a360fe35909cae6b1','social','667c7744f77b3115bb7abc55',''),
+    3:('667c8083b9ca760b999913e9','dating_and_ToM', '667c7752473a0d58a0a8de99',''),
+    4:('667c80bdb743b050bcf6b8c4','advice', '667c7760e57a1c6f476e4302',''),
+    5:('667c8100c0542aee42f6b968','faces', '667c776ff77b3115bb7abc5a',''),
+}
+
+studies_asian_nationals_cb1_r1 = {
+    1:('668ea7ae26f0946019b0e811','faces','',''),
+    2:('668eaef49f3768a43591b8a4','advice','668eaa4a71caf817fa3b3fac',''),
+    3:('668eaff3301ca34da5b6f908','dating_and_ToM', '668eaa5d07f6464955528810',''),
+    4:('668eb0d055b437f5f77ac978','social', '668eaac511066e6169120abe',''),
+    5:('668eb1d543f4ae83946be1fb','cooperation', '668eaad5c9645747122fbd96',''),
+}
+
+studies_asian_nationals_cb2_r1 = {
+    1:('668ea7bd9f3768a43591b6f6','faces','',''),
+    2:('668eaf07fb6dae6a848f4830','advice','668eaae786377d4637f973d8',''),
+    3:('668eaff802de761d3230e7e8','dating_and_ToM', '668eaaf004135438a04e6d27',''),
+    4:('668eb0d3fdb8063a4f8f48a2','social', '668eaaf9bb2504334973aaab',''),
+    5:('668eb1e09d8b346fe48d6951','cooperation', '668eab04b575d617485d4c1b',''),
+}
+
+
+studies_asian_nationals_cb1_r2 = {
+    1:('668ea7d3f3ff48f672b67069','cooperation','',''),
+    2:('668eaf11531a38e36e4808d1','social','668eab35845ef46a5289c8d5',''),
+    3:('668eb0057b5506daaa86d11c','dating_and_ToM', '668eab4cf28c825eab080b4c',''),
+    4:('668eb0d8758a6f7bfeb29ea0','advice', '668eab6dc22aab4cccc1c5a9',''),
+    5:('668eb1e7cb8c30e7e7ae7188','faces', '668eab771d615e85cc0eb216',''),
+}
+
+studies_asian_nationals_cb2_r2 = {
+    1:('668ea7d9ffeba26ff46adcba','cooperation','',''),
+    2:('668eaf1d6f7a6a79a99b38d5','social','668eab8e1b59868cb5577371',''),
+    3:('668eb00b577ef76d86411643','dating_and_ToM', '668eaba31411a6cf4ff9eee4',''),
+    4:('668eb0dbcd281249f614aac3','advice', '668eabad4863d388f8c85ebf',''),
+    5:('668eb1e9c866e012da64db71','faces', '668eabb70c35bd8c4bcfd56d',''),
+}
+
+
+
+
+
+
+
+
+
 
 
 def check_proj_subs(study,studies):
@@ -219,19 +292,19 @@ def check_proj_subs(study,studies):
 #         if study != 1:
 #             send_followup_message(study, studies_japanese[study][0], studies_japanese[study][2])
 
-def check_usa_cb1_r2():
-    print("\nChecking USA CB1 R2!")
-    for study in studies_usa_cb1_r2:
-        check_proj_subs(study,studies_usa_cb1_r2)
-        if study != 1:
-            send_followup_message(study, studies_usa_cb1_r2[study][0], studies_usa_cb1_r2[study][2])
+# def check_usa_cb1_r2():
+#     print("\nChecking USA R2 CB1!")
+#     for study in studies_usa_cb1_r2:
+#         check_proj_subs(study,studies_usa_cb1_r2)
+#         if study != 1:
+#             send_followup_message(study, studies_usa_cb1_r2[study][0], studies_usa_cb1_r2[study][2])
 
-def check_usa_cb2_r2():
-    print("\nChecking USA CB2 R2!")
-    for study in studies_usa_cb2_r2:
-        check_proj_subs(study,studies_usa_cb2_r2)
-        if study != 1:
-            send_followup_message(study, studies_usa_cb2_r2[study][0], studies_usa_cb2_r2[study][2])
+# def check_usa_cb2_r2():
+#     print("\nChecking USA CB2 R2!")
+#     for study in studies_usa_cb2_r2:
+#         check_proj_subs(study,studies_usa_cb2_r2)
+#         if study != 1:
+#             send_followup_message(study, studies_usa_cb2_r2[study][0], studies_usa_cb2_r2[study][2])
 
 # def check_asia_cb1_r1():
 #     print("\nChecking Asia CB1 R1!")
@@ -240,12 +313,12 @@ def check_usa_cb2_r2():
 #         if study != 1:
 #             send_followup_message(study, studies_asia_cb1_r1[study][0], studies_asia_cb1_r1[study][2])
 
-def check_asia_cb2_r1():
-    print("\nChecking Asia CB2 R1!")
-    for study in studies_asia_cb2_r1:
-        check_proj_subs(study,studies_asia_cb2_r1)
-        if study != 1:
-            send_followup_message(study, studies_asia_cb2_r1[study][0], studies_asia_cb2_r1[study][2])
+# def check_asia_cb2_r1():
+#     print("\nChecking Asia CB2 R1!")
+#     for study in studies_asia_cb2_r1:
+#         check_proj_subs(study,studies_asia_cb2_r1)
+#         if study != 1:
+#             send_followup_message(study, studies_asia_cb2_r1[study][0], studies_asia_cb2_r1[study][2])
 
 # def check_asia_cb1_r2():
 #     print("\nChecking Asia CB1 R2!")
@@ -261,18 +334,89 @@ def check_asia_cb2_r1():
 #         if study != 1:
             # send_followup_message(study, studies_asia_cb2_r2[study][0], studies_asia_cb2_r2[study][2])
 
+# def check_india_asia_cb1_r1():
+#     print("\nChecking INDIA/ASIA R1 CB1!")
+#     for study in studies_india_asia_cb1_r1:
+#         check_proj_subs(study,studies_india_asia_cb1_r1)
+#         if study != 1:
+#             send_followup_message(study, studies_india_asia_cb1_r1[study][0], studies_india_asia_cb1_r1[study][2])
+
+# def check_india_asia_cb2_r1():
+#     print("\nChecking INDIA/ASIA R1 CB2!")
+#     for study in studies_india_asia_cb2_r1:
+#         check_proj_subs(study,studies_india_asia_cb2_r1)
+#         if study != 1:
+#             send_followup_message(study, studies_india_asia_cb2_r1[study][0], studies_india_asia_cb2_r1[study][2])
+
+# def check_india_asia_cb1_r2():
+#     print("\nChecking INDIA/ASIA R2 CB1!")
+#     for study in studies_india_asia_cb1_r2:
+#         check_proj_subs(study,studies_india_asia_cb1_r2)
+#         if study != 1:
+#             send_followup_message(study, studies_india_asia_cb1_r2[study][0], studies_india_asia_cb1_r2[study][2])
+
+# def check_india_asia_cb2_r2():
+#     print("\nChecking INDIA/ASIA R2 CB2!")
+#     for study in studies_india_asia_cb2_r2:
+#         check_proj_subs(study,studies_india_asia_cb2_r2)
+#         if study != 1:
+#             send_followup_message(study, studies_india_asia_cb2_r2[study][0], studies_india_asia_cb2_r2[study][2])
+
+def check_asian_nationals_cb1_r1():
+    print("\nChecking ASIAN NATIONALS R1 CB1!")
+    for study in studies_asian_nationals_cb1_r1:
+        check_proj_subs(study,studies_asian_nationals_cb1_r1)
+        if study != 1:
+            send_followup_message(study, studies_asian_nationals_cb1_r1[study][0], studies_asian_nationals_cb1_r1[study][2])
+
+def check_asian_nationals_cb2_r1():
+    print("\nChecking ASIAN NATIONALS R1 CB2!")
+    for study in studies_asian_nationals_cb2_r1:
+        check_proj_subs(study,studies_asian_nationals_cb2_r1)
+        if study != 1:
+            send_followup_message(study, studies_asian_nationals_cb2_r1[study][0], studies_asian_nationals_cb2_r1[study][2])
+            
+
+def check_asian_nationals_cb1_r2():
+    print("\nChecking ASIAN NATIONALS R2 CB1!")
+    for study in studies_asian_nationals_cb1_r2:
+        check_proj_subs(study,studies_asian_nationals_cb1_r2)
+        if study != 1:
+            send_followup_message(study, studies_asian_nationals_cb1_r2[study][0], studies_asian_nationals_cb1_r2[study][2])
+
+def check_asian_nationals_cb2_r2():
+    print("\nChecking ASIAN NATIONALS R2 CB2!")
+    for study in studies_asian_nationals_cb2_r2:
+        check_proj_subs(study,studies_asian_nationals_cb2_r2)
+        if study != 1:
+            send_followup_message(study, studies_asian_nationals_cb2_r2[study][0], studies_asian_nationals_cb2_r2[study][2])
+            
+
+
+
+
+
+
 # List of functions
 functions = [
     # check_usa_cb1,
     #  check_usa_cb2,
     # check_japan_cb1,
     # check_japanese_cb1,
-    check_usa_cb1_r2,
-    check_usa_cb2_r2,
+    # check_usa_cb1_r2,
+    # check_usa_cb2_r2,
     # check_asia_cb1_r1,
-    check_asia_cb2_r1,
+    # check_asia_cb2_r1,
     # check_asia_cb1_r2,
     # check_asia_cb2_r2
+    # check_india_asia_cb1_r1,
+    # check_india_asia_cb2_r1,
+    # check_india_asia_cb1_r2,
+    # check_india_asia_cb2_r2,
+    check_asian_nationals_cb1_r1,
+    check_asian_nationals_cb2_r1,
+    check_asian_nationals_cb1_r2,
+    check_asian_nationals_cb2_r2,
 ]
 
 # Shuffle the list of functions

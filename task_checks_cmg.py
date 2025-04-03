@@ -19,7 +19,7 @@ def task_checks(subject, task):
     filemissing=True
     try:
         if task.lower() == 'faces' or task.lower() == 'emotional_faces' or task.lower() == 'emotional faces':
-            input_dirs = [f'{root}/WB_Emotional_Faces', f'{root}/WB_Emotional_Faces_CB']
+            input_dirs = [f'{root}/WB_Emotional_Faces', f'{root}/WB_Emotional_Faces_CB', f'{root}/WB_Emotional_Faces_test']
             for input_dir in input_dirs:
                 for x in os.listdir(input_dir):
                     if x.__contains__(subject) and x.__contains__('emotional_faces_v2'):
@@ -51,7 +51,9 @@ def task_checks(subject, task):
                         too_slow_responses = sum(data.result[data.event_type==7]=='too slow')
                         if  too_slow_responses> 100:
                             flags.append(f'Too slow on {too_slow_responses} trials')
-                
+                        # exit if flags array is empty (because first file checked was complete)
+                        if not flags:
+                            break
                             
 
         elif task.lower() == 'advice' or task.lower() == 'advice_task': 
@@ -109,7 +111,9 @@ def task_checks(subject, task):
                         flags.append(f'Suspiciously long RT: {np.round(max(rts),2)} seconds')
                     if stats.mean(rts) > 3.5 or stats.mean(rts) < .1:
                         flags.append(f'Avg RT = {np.round(stats.mean(rts),3)}, may indicate not paying attention')
-                    
+                    # exit if flags array is empty (because first file checked was complete)
+                    if not flags:
+                        break
 
         elif task.lower() == 'dating' or task.lower() == 'blind_dating' or task.lower() == 'blind dating': 
             input_dir = f'{root}/WB_Blind_Dating'
@@ -135,6 +139,9 @@ def task_checks(subject, task):
                         flags.append(f'Suspiciously long RT: {np.round(max(rts),2)} seconds')
                     if stats.mean(rts) > 3.5 or stats.mean(rts) < .1:
                         flags.append(f'Avg RT = {np.round(stats.mean(rts),3)}, may indicate not paying attention')
+                    # exit if flags array is empty (because first file checked was complete)
+                    if not flags:
+                        break
 
         elif task.lower() == 'tom' or task.lower() == 'theory_of_mind' or task.lower() == 'theory of mind': 
             input_dir = f'{root}/WB_Theory_Of_Mind'
@@ -168,7 +175,10 @@ def task_checks(subject, task):
                         flags.append(f'Missing {sum(trial)} Trials!')
                     # if len(list(np.where(np.array(resp_movement)==0)[0])) >= 30:
                     #     flags.append(f"Didn't move slider on {len(list(np.where(np.array(resp_movement)==0)[0]))} trials!")
-                          
+                    # exit if flags array is empty (because first file checked was complete)
+                    if not flags:
+                        break
+
         elif task.lower() == 'social media' or task.lower() == 'social' or task.lower() == 'social_media': 
             input_dirs = [f'{root}/WB_Social_Media', f'{root}/WB_Social_Media_CB']
             for input_dir in input_dirs:
@@ -193,7 +203,9 @@ def task_checks(subject, task):
                             flags.append(f'Suspiciously long RT: {np.round(max(rts),2)} seconds')
                         if stats.mean(rts) > 3.5 or stats.mean(rts) < .1:
                             flags.append(f'Avg RT = {np.round(stats.mean(rts),3)}, may indicate not paying attention')
-
+                        # exit if flags array is empty (because first file checked was complete)
+                        if not flags:
+                            break
                         # if data.iloc[0,].trial_type  == "h1_Likes":
                         #     schedule = pd.read_csv(f'{root_mini}rsmith/lab-members/cgoldman/Wellbeing/social_media/schedules/sm_distributed_schedule1-counterbalanced.csv')
                         #     reward_diff = []
@@ -244,7 +256,9 @@ def task_checks(subject, task):
                             flags.append(f'Suspiciously long RT: {np.round(max(rts),2)} seconds')
                         if stats.mean(rts) > 3.5 or stats.mean(rts) < .1:
                             flags.append(f'Avg RT = {np.round(stats.mean(rts),3)}, may indicate not paying attention')
-
+                        # exit if flags array is empty (because first file checked was complete)
+                        if not flags:
+                            break
                         # total_lose,total_win,win_shift,lose_stay = [0,0,0,0]
                         # for trial in range(1,480):
                         #     previous_result = response_info.iloc[trial-1].result
@@ -279,5 +293,5 @@ def task_checks(subject, task):
         status=[True,flags]
     return [status] 
     
-behavioral_checks = task_checks("65fb5f438050e2495c957083", "dating")
-print(behavioral_checks)
+#behavioral_checks = task_checks("669d7a56135e5944f27496f1", "tom")
+#print(behavioral_checks)

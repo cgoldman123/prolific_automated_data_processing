@@ -9,7 +9,7 @@ elif os.name == "posix":
 
 folders = {f'{root}/NPC/DataSink/StimTool_Online/WB_Cooperation_Task',f'{root}/NPC/DataSink/StimTool_Online/WB_Social_Media',
             f'{root}/NPC/DataSink/StimTool_Online/WB_Blind_Dating',f'{root}/NPC/DataSink/StimTool_Online/WB_Advice',f'{root}/NPC/DataSink/StimTool_Online/WB_Emotional_Faces',
-            f'{root}/NPC/DataSink/StimTool_Online/WB_Emotional_Faces_CB',f'{root}/NPC/DataSink/StimTool_Online/WB_Social_Media_CB'}
+            f'{root}/NPC/DataSink/StimTool_Online/WB_Emotional_Faces_CB',f'{root}/NPC/DataSink/StimTool_Online/WB_Social_Media_CB',f'{root}/NPC/DataSink/StimTool_Online/WB_Emotional_Faces_test'}
 
 
 
@@ -158,11 +158,11 @@ def check_questionnaires(subject, sessions_to_check):
         total_attention_checks.update(session_attention_checks)
         total_attention_checks.update(all_files_present)
 
-
-    passed_all_checks = all(total_attention_checks.values())
+    # return that all checks were passed as long as no more than 1 attn check failed
+    passed_all_checks = sum(not x for x in total_attention_checks.values()) <= 1
     return passed_all_checks, total_attention_checks
 
 
-#print(check_questionnaires("65fb5f438050e2495c957083",[3]))
-#print(check_questionnaires("66290ede1ab02829b1c72509",[5]))
+#print(check_questionnaires("650739048d93f13a5f6b200b",[4]))
+#print(check_questionnaires("669d7a56135e5944f27496f1",[3]))
 
