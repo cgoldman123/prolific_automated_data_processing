@@ -1,6 +1,29 @@
 import sys, os, re, subprocess, requests, json, random
 import pandas as pd
 
+"""
+===============================================================================
+send_message.py
+
+Sends a standardized message to participants who have completed Session 1
+of the longitudinal Emotion and Decision-Making Study to notify them that
+they are now approved for Session 2.
+
+Features:
+- Chooses randomly between Carter's or Claire's Prolific account for sending
+  the message to balance usage.
+- Uses the Prolific API's messaging endpoint to deliver personalized messages.
+- Reads API tokens from local files (`carter_prolific_api_token.txt` and
+  `claire_prolific_api_token.txt`).
+
+This script is typically called from within `prolific_api.py` after a participant
+has passed quality control and been approved to advance.
+
+Author: Carter Goldman
+===============================================================================
+"""
+
+
 sys.tracebacklimit=0
 
 

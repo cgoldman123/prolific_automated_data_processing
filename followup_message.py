@@ -1,6 +1,46 @@
 import sys, os, requests, json, random, re
 from datetime import datetime, timedelta
 
+"""
+===============================================================================
+followup_message.py
+
+Sends a follow-up message to participants who were added to a Prolific study 
+participant group for Session X but have not started the session within 48 hours.
+
+Workflow:
+- For each participant in the group:
+    1. Retrieves the time they were added to the participant group.
+    2. Checks if they’ve already started a submission (any non-NEW status).
+    3. Checks if they’ve received a relevant message from either Carter or Claire.
+    4. If 48 hours have passed and none of the above apply, sends a reminder.
+
+Message Logic:
+- Participants are only contacted if:
+    - 48 hours have passed since they were added.
+    - They have NOT started the session.
+    - They have NOT been messaged about this session.
+
+Message Content:
+- Encourages participants to continue within the 2-day window.
+- Provides a gentle opt-out prompt and contact support.
+
+API Authentication:
+- Messages are randomly sent via Carter’s or Claire’s account to balance traffic.
+- Uses API tokens stored in `carter_prolific_api_token.txt` and 
+  `claire_prolific_api_token.txt`.
+
+Inputs:
+- session: Integer (1–5)
+- study: Prolific study ID for that session
+- id: Participant group ID for that session
+
+Note:
+- Output is printed to console (including dry-run message confirmations).
+===============================================================================
+"""
+
+
 with open('carter_prolific_api_token.txt', 'r') as file:
     API_token_carter = file.read().strip()
 

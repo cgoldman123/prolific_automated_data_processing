@@ -13,7 +13,32 @@
 #SBATCH --chdir=/media/labs/rsmith/wellbeing/tasks/QC/
 #################################################
 
-### run this script with sbatch /media/labs/rsmith/wellbeing/tasks/QC/run_daily_prolific.ssub
+##############################################################
+# run_daily_prolific.ssub
+#
+# Description:
+# This SLURM job script automates the daily execution of 
+# the Prolific participant management pipeline by running 
+# `prolific_api.py`, which handles approval, QC, messaging, 
+# and group advancement.
+#
+# Features:
+# - Runs in the `c3_short` partition with 6GB memory for 1 hour.
+# - Captures stdout and stderr to time-stamped log files.
+# - Emails Carter Goldman on job failure.
+# - Automatically resubmits itself using a CRON-like schedule 
+#   (via `next-cron-time`) every 2 hours.
+#
+# Usage:
+# sbatch /media/labs/rsmith/wellbeing/tasks/QC/run_daily_prolific.ssub
+#
+# Dependencies:
+# - Python 3.10.4 module
+# - `next-cron-time` module to support auto-resubmission
+# - Script assumes conda or system-level Python is accessible
+#
+##############################################################
+
 
 # Daily 'CRON' Jobs
 # potentially source a file to load in a virtual env

@@ -4,6 +4,43 @@ import statistics as stats
 import scipy.stats as scipy_stats
 import numpy as np
 
+
+# ===============================================================================
+# task_checks_cmg.py
+
+# Performs task-specific behavioral quality control for participants who have
+# completed one of six tasks in the Emotion and Decision-Making Study:
+
+# - Emotional Faces
+# - Advice Task
+# - Blind Dating
+# - Theory of Mind (ToM)
+# - Social Media
+# - Cooperation
+
+# Each task has tailored logic for:
+# - Verifying completeness of trials
+# - Detecting unusually long or short reaction times
+# - Identifying suspicious response patterns or inattention
+
+# Returns a list of descriptive flag messages if any issues are detected, or a
+# "pass" status if all checks are met.
+
+# This script is designed to be imported and called by other QC pipelines,
+# such as `prolific_api.py`.
+
+# Input:
+# - subject: Prolific participant ID
+# - task: name of the behavioral task (e.g., 'faces', 'advice', etc.)
+
+# Output:
+# - A list of QC flags for the participant’s task performance
+
+# Requires:
+# - Raw task data saved in `StimTool_Online/WB_*` directories
+# ===============================================================================
+
+
 warnings.filterwarnings('ignore')
 
 #sub = sys.argv[1]
@@ -293,5 +330,6 @@ def task_checks(subject, task):
         status=[True,flags]
     return [status] 
     
+# Uncomment the following lines to test the function directly
 #behavioral_checks = task_checks("669d7a56135e5944f27496f1", "tom")
 #print(behavioral_checks)

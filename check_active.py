@@ -2,7 +2,33 @@ import requests, json, os, time,random
 import pandas as pd
 from datetime import datetime, timedelta, timezone
 
-# script to check if participants are actively doing prolific wellbeing
+"""
+===============================================================================
+
+Script to identify Prolific participants who are currently active in any 
+session of the Wellbeing Study.
+
+Functionality:
+- Uses Prolific's API to fetch submission data for all sessions across cohorts.
+- Prints Prolific IDs of participants whose submission status is 'ACTIVE',
+  indicating they are currently working on a session.
+- Supports all site-specific cohorts (USA, Japan, Asia) and CB1/CB2 R1/R2 splits.
+
+Key Elements:
+- `studies_*` dictionaries define the project IDs and metadata for each cohort/session.
+- `check_proj_subs()` checks a specific session and prints active participant IDs.
+
+Usage:
+- Run manually or via cron/SLURM job to monitor session activity in real-time.
+- Can be adapted to log activity or trigger downstream actions.
+
+Dependencies:
+- Assumes valid API token stored in `carter_prolific_api_token.txt`.
+- Requires internet access and a functioning Prolific API connection.
+
+
+===============================================================================
+"""
 
 
 if os.name == "nt":

@@ -1,5 +1,23 @@
 import requests, json, os, time
 
+# ------------------------------------------------------------------------------
+# prolific_participant_groups.py
+#
+# This script contains functions for managing participant group assignments
+# on Prolific via the Prolific API.
+#
+# Main Functions:
+# - `add_to_participant_groups`: Automatically appends new participants to a
+#    specified Prolific participant group for the next session in a study.
+# - `print_participants_to_add`: Manually prints out participant IDs that
+#    should be added to a session (useful for manual QA or fallback).
+#
+# Requires:
+# - A local API token in `carter_prolific_api_token.txt`
+# - Study metadata passed via the `studies` dictionary
+# ------------------------------------------------------------------------------
+
+
 with open('carter_prolific_api_token.txt', 'r') as file:
     carter_api_token = file.read().strip()
 
@@ -10,6 +28,24 @@ headers = {
     "Authorization": f"Token {carter_api_token}",
     "Content-Type": "application/json"
 }
+
+
+# ------------------------------------------------------------------------------
+# add_to_participant_groups(participants_to_add, study, studies)
+#
+# Adds participants to the correct participant group for the next session.
+#
+# Parameters:
+# - participants_to_add: dict mapping session_id → list of participant_ids
+# - study: the current session number (e.g., 1–4)
+# - studies: dictionary mapping session number → (project_id, name, group_id, ...)
+#
+# Steps:
+# 1. GET current participants in the next session’s group.
+# 2. Combine with new participants, ensuring uniqueness.
+# 3. PATCH updated group back to Prolific.
+# ------------------------------------------------------------------------------
+
 
 def add_to_participant_groups(participants_to_add, study, studies):
     for session_id in participants_to_add:
@@ -40,6 +76,18 @@ def add_to_participant_groups(participants_to_add, study, studies):
         else:
             print(f"Failed to patch participant group for session {study}. Error: {response.status_code}")
             print(response.text)
+
+
+# ------------------------------------------------------------------------------
+# print_participants_to_add(participants_to_add)
+#
+# Prints the participant IDs that should be added to each session group.
+# Useful for manual review if automated PATCH is skipped or fails.
+#
+# Example Output:
+# Add the following IDs to session 3: abc123, def456, ghi789
+# ------------------------------------------------------------------------------
+
 
 # function for manually adding to participant groups
 def print_participants_to_add(participants_to_add):

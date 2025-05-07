@@ -6,6 +6,29 @@ if os.name == "nt":
 elif os.name == "posix":
     root = '/media/labs'
 
+
+"""
+===============================================================================
+pull_demographics.py
+
+Downloads and compiles demographic data for all sessions of each study cohort
+hosted on Prolific. This script accesses Prolific's API to export demographic
+CSV files for each study session and appends metadata (Round, Counterbalance,
+Culture, Session) for tracking.
+
+Key Features:
+- Loops over all sessions in all defined cohorts (USA, Japan, Asia, etc.)
+- Pulls demographic data from each session using Prolific's API
+- Concatenates into a single master dataframe
+- Saves final output to: ../../data/prolific/all_demographic_data.csv
+
+Token:
+- Reads API token from `carter_prolific_api_token.txt`
+
+===============================================================================
+"""
+
+
 os.chdir(f'{root}/rsmith/wellbeing/tasks/QC')
 
 demographics = pd.DataFrame(columns=['Submission id', 'Participant id', 'Status', 'Custom study tncs accepted at', 'Started at', 'Completed at', 'Reviewed at', 'Archived at', 'Time taken', 'Completion code', 'Total approvals', 'Harmful content', 'Age', 'Sex', 'Ethnicity simplified', 'Country of birth', 'Country of residence', 'Nationality', 'Language', 'Student status', 'Employment status'])
@@ -176,6 +199,21 @@ studies_asian_nationals_cb2_r2 = {
 
 
 
+# ------------------------------------------------------------------------------
+# get_demos(study, studies, p_name)
+#
+# Downloads and processes demographic data from a specific Prolific study session.
+# Adds metadata for cohort labeling and appends to the global `demographics` dataframe.
+#
+# Parameters:
+# - study: Integer representing the session number (1 to 5)
+# - studies: Dictionary with study metadata
+# - p_name: Label string (e.g., 'R1_CB1_Asia') used to tag round, CB group, and culture
+#
+# Output:
+# - Temporarily writes the .csv to ../../data/prolific/demographics_temp.txt
+# - Appends cleaned and labeled data to global `demographics` variable
+# ------------------------------------------------------------------------------
 
 
 def get_demos(study,studies,p_name):

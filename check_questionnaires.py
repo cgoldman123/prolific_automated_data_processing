@@ -1,6 +1,35 @@
 import os, sys, re
 import pandas as pd
 
+"""
+===============================================================================
+check_questionnaires.py
+
+Performs quality control (QC) on participant questionnaire responses by:
+- Verifying presence of expected survey files for a given session.
+- Checking whether specific attention-check questions were answered correctly.
+
+Core Features:
+- Scans known survey folders for subject-specific files across tasks.
+- Applies regex-based filename matching to confirm that required files exist.
+- Validates predefined attention-check responses per survey and session.
+- Aggregates results across multiple sessions and reports pass/fail status.
+
+Returns:
+- `passed_all_checks`: True if no more than one attention check was failed.
+- `total_attention_checks`: Dictionary with booleans for each check and file.
+
+Used by:
+- Automated pipelines to approve or reject Prolific participants based on QC.
+
+Dependencies:
+- Requires consistent naming for CSVs and correct folder structure.
+
+Example usage:
+>>> check_questionnaires("669d7a56135e5944f27496f1", [3])
+===============================================================================
+"""
+
 
 if os.name == "nt":
     root = 'L:'

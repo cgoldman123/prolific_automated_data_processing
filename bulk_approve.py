@@ -1,6 +1,42 @@
 import requests, json, os, time
 import pandas as pd
 
+"""
+================================================================================
+approve_session_submissions.py
+
+This script checks submissions for each session of several Prolific studies and 
+automatically approves participants if:
+
+1. Their submission is in 'AWAITING REVIEW' status.
+2. Their participant ID appears in the pre-defined session 5 approval list.
+
+Features:
+- Works across multiple cultural cohorts (USA CB1/CB2, Japan CB1, Japanese CB1).
+- Automatically loads the approval list from the path specified in the `studies` dictionary.
+- Uses Prolific's v1 API to retrieve submissions and send approval requests.
+
+Inputs:
+- `studies_*` dictionaries define session structure: (project ID, name, group ID, approval list CSV path).
+- API token is loaded from a local file (`carter_prolific_api_token.txt`).
+
+Output:
+- Prints approval actions to console and reports any failures with error messages.
+
+Usage:
+- Intended for routine batch approval of longitudinal study participants.
+- Make sure the approve list CSV is up-to-date and correctly formatted with a 
+  column named `participant_id`.
+
+Notes:
+- This script approves participants **only** if they were included in the approve list 
+  for session 5 of the corresponding study.
+- Encoding fallback (`utf-8` → `latin1`) is handled in case of character issues in CSV.
+
+================================================================================
+"""
+
+
 if os.name == "nt":
     root = 'L:'
 elif os.name == "posix":

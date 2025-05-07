@@ -2,6 +2,32 @@ import requests, json, os, time,random
 import pandas as pd
 from datetime import datetime, timedelta, timezone
 
+"""
+===============================================================================
+check_remaining_participants_todo_session.py
+
+Identifies participants who were approved to complete Session 5 but never began it.
+
+This script:
+- Queries Prolific’s API to retrieve all participants approved for Session 4.
+- Retrieves all participants who have started (or attempted) Session 5.
+- Calculates the difference to flag those who never started Session 5.
+- Prints missing participants by cohort (Round x Counterbalance group).
+
+Functions:
+- get_approved_session_4: returns IDs of participants approved for Session 4.
+- get_started_session_5: returns IDs of participants who started Session 5
+  (including all non-NEW statuses).
+- The main script compares the two sets for each cohort and prints results.
+
+Usage:
+- Run manually to audit incomplete progression through the longitudinal study.
+
+Notes:
+- Uses API token stored in `carter_prolific_api_token.txt`.
+- Focused on the "Asian Nationals" cohorts for R1 and R2.
+===============================================================================
+"""
 
 
 if os.name == "nt":

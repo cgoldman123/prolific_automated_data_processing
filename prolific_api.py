@@ -7,6 +7,44 @@ from followup_message import send_followup_message
 import pandas as pd
 from datetime import datetime, timedelta, timezone
 
+
+"""
+===============================================================================
+prolific_api.py
+
+Main orchestration script for automated participant management in Prolific-based
+longitudinal studies. This script pulls Prolific submission data, runs quality
+control checks on behavioral and survey data, approves eligible participants,
+adds them to the appropriate group for the next session, and sends reminder
+messages.
+
+Functionality:
+- Evaluates whether a participant should be approved based on:
+  - Completion status and timestamp
+  - Attention check pass/fail results
+  - Behavioral QC flags from task performance
+- Automatically approves participants via Prolific API
+- Logs failures in `participant_mistakes.txt`
+- Adds approved participants to the participant group for their next session
+- Sends automated messages encouraging session continuation
+- Includes handlers for multiple cohorts (USA, Japan, Asia, etc.) across rounds
+
+Intended Usage:
+This script can be executed manually or on a schedule (e.g., via SLURM).
+By default, only a subset of cohorts are activated. To enable additional
+cohorts, uncomment the corresponding function in the `functions` list at bottom.
+
+Dependencies:
+- Requires local file: `carter_prolific_api_token.txt`
+- Depends on utility modules: check_questionnaires, task_checks_cmg,
+  send_message, followup_message, prolific_participant_groups
+
+Authors: Carter Goldman and Claire Lavalley
+===============================================================================
+"""
+
+
+
 if os.name == "nt":
     root = 'L:'
 elif os.name == "posix":
@@ -179,8 +217,19 @@ studies_asian_nationals_cb2_r2 = {
 
 
 
-
-
+# ------------------------------------------------------------------------------
+# check_proj_subs(study, studies)
+# 
+# - Checks each participant submission for a given study session.
+# - Approves those who pass all attention and behavioral QC checks.
+# - Logs failed cases to participant_mistakes.txt.
+# - Automatically adds approved participants to the next session's group.
+# - Optionally sends a Session 2 message after completing Session 1.
+#
+# Arguments:
+# - study: Session number (1–5)
+# - studies: Dictionary mapping session to study metadata
+# ------------------------------------------------------------------------------
 
 def check_proj_subs(study,studies):
     global num_submissions_approved
@@ -262,6 +311,30 @@ def check_proj_subs(study,studies):
             second_session_message(subject_id) 
     add_to_participant_groups(ids_by_session, study+1, studies)
         
+
+
+
+
+
+
+
+
+
+
+
+
+# ------------------------------------------------------------------------------
+# Batch Execution
+#
+# - A list of cohort-check functions is defined (currently only Asian Nationals).
+# - The list is shuffled to avoid hitting the same study order each run.
+# - Each function is called sequentially.
+#
+# To enable additional cohorts, uncomment them in the `functions` list.
+# This allows flexible control over which participant groups are processed.
+# ------------------------------------------------------------------------------
+
+
 
 
 # def check_usa_cb1():

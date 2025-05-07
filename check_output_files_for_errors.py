@@ -1,5 +1,32 @@
 import os
 
+"""
+===============================================================================
+
+Checks .stdout output files in a specified directory for known error messages 
+from automated Prolific QC jobs.
+
+Functionality:
+- Scans all `.stdout` files in the target directory.
+- Sorts files by most recent modification time.
+- Searches for specified error strings (e.g., failed API calls).
+- Returns a list of files containing at least one of the error messages.
+
+Intended Use:
+- Monitor SLURM job outputs for failures related to participant group updates.
+- Can be used in daily QA routines or integrated into monitoring pipelines.
+
+Parameters:
+- `directory_path`: Directory where .stdout files are stored.
+- `error_messages`: List of error message substrings to search for.
+
+Returns:
+- Prints files with errors, or a message if no errors were found.
+
+===============================================================================
+"""
+
+
 def check_files_for_errors(directory_path, error_messages):
     # Get all files in the directory
     files = [f for f in os.listdir(directory_path) if f.endswith('.stdout')]
